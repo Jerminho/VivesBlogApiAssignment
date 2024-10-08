@@ -5,11 +5,13 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VivesBlog.Ui.Mvc", "VivesBlog.Ui.Mvc\VivesBlog.Ui.Mvc.csproj", "{075CA47C-CD9E-4403-BA0B-5A27819501C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VivesBlog.Core", "VivesBlog.Core\VivesBlog.Core.csproj", "{E951A32E-7E8C-4A2D-A929-54B635E4127B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VivesBlog.Core", "VivesBlog.Core\VivesBlog.Core.csproj", "{E951A32E-7E8C-4A2D-A929-54B635E4127B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VivesBlog.Model", "VivesBlog.Model\VivesBlog.Model.csproj", "{4959D30C-693F-4889-819B-1B35EC6D1523}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VivesBlog.Model", "VivesBlog.Model\VivesBlog.Model.csproj", "{4959D30C-693F-4889-819B-1B35EC6D1523}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VivesBlog.Services", "VivesBlog.Services\VivesBlog.Services.csproj", "{2358C2AE-DBC7-4F06-B553-63CE9833E061}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VivesBlog.Services", "VivesBlog.Services\VivesBlog.Services.csproj", "{2358C2AE-DBC7-4F06-B553-63CE9833E061}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VivesBlog.Dto", "VivesBlog.DTO\VivesBlog.Dto.csproj", "{756472D1-CC54-4991-8DF5-0215725026F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{2358C2AE-DBC7-4F06-B553-63CE9833E061}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2358C2AE-DBC7-4F06-B553-63CE9833E061}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2358C2AE-DBC7-4F06-B553-63CE9833E061}.Release|Any CPU.Build.0 = Release|Any CPU
+		{756472D1-CC54-4991-8DF5-0215725026F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{756472D1-CC54-4991-8DF5-0215725026F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{756472D1-CC54-4991-8DF5-0215725026F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{756472D1-CC54-4991-8DF5-0215725026F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
