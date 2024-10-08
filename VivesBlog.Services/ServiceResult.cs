@@ -31,6 +31,19 @@ namespace VivesBlog.Services
         // List of error messages (validation errors, not found errors, etc.)
         public List<string> Errors { get; private set; } = new List<string>();
 
+
+        // Add NotEmpty validation
+        public void NotEmpty(string propertyName)
+        {
+            Errors.Add($"{propertyName} cannot be empty.");
+        }
+
+        // Add Invalid validation
+        public void Invalid(string propertyName, string message)
+        {
+            Errors.Add($"{propertyName}: {message}");
+        }
+
         // Add an error to the result
         public void AddError(string errorMessage)
         {
@@ -50,15 +63,6 @@ namespace VivesBlog.Services
             AddError($"{entityName} has been deleted.");
         }
 
-        // Custom validation method (can be expanded as needed)
-        public void Validate(object entity)
-        {
-            // Perform validation logic (such as using DataAnnotations)
-            // For simplicity, let's just demonstrate a simple validation rule
-            if (entity is null)
-            {
-                AddError("Entity is null.");
-            }
-        }
+        
     }
 }

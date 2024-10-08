@@ -4,6 +4,7 @@ using VivesBlog.Dto.Requests;
 using VivesBlog.Dto.Results;
 using VivesBlog.Model;
 using VivesBlog.Services.Extensions.Projection;
+using VivesBlog.Services.Extensions.Validation;
 
 namespace VivesBlog.Services
 {

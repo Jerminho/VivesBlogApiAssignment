@@ -11,8 +11,4 @@
     <ProjectReference Include="..\VivesBlog.DTO\VivesBlog.Dto.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Extensions\Validation\" />
-  </ItemGroup>
-
 </Project>
