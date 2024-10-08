@@ -5,16 +5,12 @@ using VivesBlog.Services;
 
 namespace VivesBlog.Api.Controllers
 {
+    
+    [Route("[controller]")]
     [ApiController]
-    [Route("[api/controller]")]
-    public class PeopleController : ControllerBase
+    public class PeopleController(PersonService personService) : ControllerBase
     {
-        private readonly PersonService _personService;
-
-        public PeopleController(PersonService personService)
-        {
-            _personService = personService;
-        }
+        private readonly PersonService _personService = personService;
 
         //Find (more) GET api/people
         [HttpGet]
