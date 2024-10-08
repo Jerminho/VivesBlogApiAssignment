@@ -5,7 +5,7 @@ using VivesBlog.Services;
 
 namespace VivesBlog.Api.Controllers
 {
-    
+    // [Route("[api\controller]")] ??
     [Route("[controller]")]
     [ApiController]
     public class PeopleController(PersonService personService) : ControllerBase
