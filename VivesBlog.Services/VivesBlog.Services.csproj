@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VivesBlog.Core\VivesBlog.Core.csproj" />
+    <ProjectReference Include="..\VivesBlog.DTO\VivesBlog.Dto.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\Validation\" />
   </ItemGroup>
 
 </Project>

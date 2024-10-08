@@ -1,5 +1,10 @@
-﻿using VivesBlog.Core;
+﻿using Microsoft.EntityFrameworkCore;
+using VivesBlog.Core;
+using VivesBlog.Dto.Results;
 using VivesBlog.Model;
+using System.Linq;
+using VivesBlog.Services.Extensions.Projection;
+using VivesBlog.Dto.Requests;
 
 namespace VivesBlog.Services
 {
@@ -13,61 +18,102 @@ namespace VivesBlog.Services
         }
 
         //Find
-        public IList<Person> Find()
+        public async Task< IList<PersonResult>> Find()
         {
-            return _dbContext.People
-                .ToList();
+            return await _dbContext.People
+                .Project()
+                .ToListAsync();
         }
 
         //Get (by id)
-        public Person? Get(int id)
+        public async Task<ServiceResult<PersonResult>> Get(int id)
         {
-            return _dbContext.People
-                .FirstOrDefault(p => p.Id == id);
+            var serviceResult = new ServiceResult<PersonResult>();
+
+            var person = await _dbContext.People
+                .Project()
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            serviceResult.Data = person;
+            if (person is null)
+            {
+                serviceResult.NotFound(nameof(Person), id);
+            }
+
+            return serviceResult;
         }
 
-        //Create
-        public Person? Create(Person person)
-        {
-            _dbContext.People.Add(person);
-            _dbContext.SaveChanges();
+        // SO FAR SO GOOD
 
-            return person;
+        //Create
+        public async Task<ServiceResult<PersonResult>> Create(PersonRequest request)
+        {
+            var serviceResult = new ServiceResult<PersonResult>();
+
+            // Validate the request DTO
+            serviceResult.Validate(request);
+            if (!serviceResult.IsSuccess)
+            {
+                return serviceResult;
+            }
+
+            var person = new Person
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Email = request.Email,
+            };
+
+            _dbContext.People.Add(person);
+            await _dbContext.SaveChangesAsync();
+
+            return await Get(person.Id);
         }
 
         //Update
-        public Person? Update(int id, Person person)
+        public async Task<ServiceResult<PersonResult>> Update(int id, PersonRequest request)
         {
-            var dbPerson = _dbContext.People
-                .FirstOrDefault(p => p.Id == id);
+            var serviceResult = new ServiceResult<PersonResult>();
 
-            if (dbPerson is null)
-            {
-                return null;
-            }
-
-            dbPerson.FirstName = person.FirstName;
-            dbPerson.LastName = person.LastName;
-            dbPerson.Email = person.Email;
-
-            _dbContext.SaveChanges();
-
-            return dbPerson;
-        }
-
-        //Delete
-        public void Delete(int id)
-        {
-            var person = _dbContext.People
-                .FirstOrDefault(p => p.Id == id);
+            // Retrieve the person from the database
+            var person = await _dbContext.People
+                .FirstOrDefaultAsync(p => p.Id == id);
 
             if (person is null)
             {
-                return;
+                serviceResult.NotFound(nameof(Person), id);
+                return serviceResult;
+            }
+
+            person.FirstName = request.FirstName;
+            person.LastName = request.LastName;
+            person.Email = request.Email;
+
+            await _dbContext.SaveChangesAsync();
+
+            return await Get(id);
+        }
+
+        //Delete
+        public async Task<ServiceResult> Delete(int id)
+        {
+            var serviceResult = new ServiceResult();
+
+            // Find the person by ID
+            var person = await _dbContext.People
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (person is null)
+            {
+                serviceResult.NotFound(nameof(Person), id);
+                return serviceResult;
             }
 
             _dbContext.People.Remove(person);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
+
+            serviceResult.Deleted(nameof(Person));
+            return serviceResult;
         }
 
     }
